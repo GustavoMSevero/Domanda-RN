@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { Platform, StyleSheet, Text, View, AsyncStorage, FlatList } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 type Props = {};
@@ -7,47 +7,43 @@ export default class AgendaComponent extends Component<Props> {
 
   constructor(props) {
     super(props);
-    this.state = { agenda:[], idusuario:'', nome:'', sobrenome:''};
+    this.state = { agenda:[], idusuario:'', nome:'', sobrenome:'', usuario:[]};
 
   }
 
 componentDidMount(){
   this.loadData();
-  this.getAgenda();
 }
 
 async loadData(){
   AsyncStorage.getItem("usuario").then((data)=>{
-      console.log(data);
-      // this.setState({idcliente: data.idusuario});
-      // console.log('idusuario '+ this.state.idusuario);
+      this.setState({usuario: JSON.parse(data)});
+      //console.log(this.state.usuario)
+      this.setState({idusuario: this.state.usuario.idusuario});
+      this.getAgenda();
     });
 }
 
 getAgenda(){
-  //alert('Pegando agenda')
-  //var idcliente = data.idcliente;
-  // var opcao = 3;
-  // let urlGetAgenda = 'http://localhost:8888/sistemas/Webapps/domanda_api/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idcliente='+idcliente;
-  // fetch(urlGetAgenda,{ method: 'GET',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     })
-  //     .then((response) => response.json())
-  //     .then((responseJson) => {
-  //         if(responseJson == null){
-  //           console.log("Não tem compromisso")
-  //         } else {
-  //           console.log(responseJson)
-  //         }
-          
-  //       })
-  //       .catch((error) => {
-  //       console.error(error);
-        
-  //       });
+
+  var idcliente = this.state.idusuario;
+  //console.log('idusuario '+idcliente)
+  var opcao = 3;
+  let urlGetAgenda = 'http://localhost:8888/sistemas/Webapps/domanda_api/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idcliente='+idcliente;
+  fetch(urlGetAgenda,{ method: 'GET',
+      headers: {
+        Accept: 'application/json','Content-Type': 'application/json',
+      },
+      })
+      .then((response) => response.json())
+      .then((responseJson) => {
+          console.log(responseJson)
+          this.setState({agenda: responseJson});
+        })
+        .catch((error) => {
+        console.error(error);
+        });
+
 }
       
   
@@ -60,7 +56,17 @@ getAgenda(){
         </View>
         
         <View>
-          <Text></Text>
+          <FlatList
+            data={this.state.agenda}
+            keyExtractor={this._keyExtractor}
+            renderItem={
+              ({item}) => 
+              <View>
+                <Text>Onde: {item.estabelecimento} </Text>
+                <Text>Local: {item.unidade} </Text> 
+              </View>
+            }
+          />
         </View>
       </View>
     );
@@ -75,7 +81,9 @@ const styles = StyleSheet.create({
   textoAgenda: {
     marginTop: 40,
     marginLeft: '40%',
+    marginBottom: 20,
     fontSize: 18,
-  }
+  },
+
   
 });
