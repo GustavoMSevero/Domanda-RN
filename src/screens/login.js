@@ -12,39 +12,53 @@ export default class LoginComponent extends Component<Props> {
 
     this.state = { msg: null , email: null, senha: null};
 
-    //this.logar  = this.logar.bind(this);
+  }
 
+  componentDidMount(){
+    this.loadData();
+  }
+  
+  async loadData(){
+    AsyncStorage.getItem("usuario").then((data)=>{
+        //console.log(data);
+        if(data == null){
+          console.log("Não tem dados")
+        } else{
+          Actions.push('agenda');
+        }
+  
+      });
   }
 
   logar(){
     //console.log(this.state.email+' '+this.state.senha)
-    //var login = {"email":this.state.email, "senha":this.state.senha}
     var urlLoginUsuario = 'http://localhost:8888/sistemas/Webapps/domanda_api/api/admin_estabelecimento/pegaUsuario.php';
     fetch(urlLoginUsuario,{ method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    body:JSON.stringify({
-      email: this.state.email, 
-      senha: this.state.senha})})
-      
-    .then((response) => response.json())
-    .then((responseJson) => {
-        //console.log(responseJson)
-        if(responseJson.status === "null"){
-          this.setState({msg: responseJson.msg});
-          return;
-        }else{
-          AsyncStorage.setItem("usuario", responseJson);
-          Actions.push('principal');
-        }
-        
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+        body:JSON.stringify({
+          email: this.state.email, 
+          senha: this.state.senha
+        })
       })
-      .catch((error) => {
-      console.error(error);
-      
-      });
+
+      .then((response) => response.json())
+      .then((responseJson) => {
+          if(responseJson.status === "null"){
+            this.setState({msg: responseJson.msg});
+            return;
+          }else{
+            AsyncStorage.setItem("usuario", JSON.stringify(responseJson));
+            Actions.push('principal');
+          }
+          
+        })
+        .catch((error) => {
+        console.error(error);
+        
+        });
 
   }
   

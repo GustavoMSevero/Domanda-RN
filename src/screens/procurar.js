@@ -3,10 +3,11 @@ import { Platform, StyleSheet, Text, View, AsyncStorage } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 type Props = {};
-export default class PrincipalComponent extends Component<Props> {
+export default class ProcurarComponent extends Component<Props> {
 
   constructor(props) {
     super(props);
+    this.state = { msg: null , email: null, senha: null};
 
   }
 
@@ -15,16 +16,10 @@ componentDidMount(){
 }
 
 async loadData(){
-    try {
-        const usuario = AsyncStorage.getItem("usuario");
-        if (usuario !== null) {
-        // We have data!!
-        console.log(usuario);
-        }
-        } catch (error) {
-        // Error retrieving data
-        console.log(error);
-        }
+  AsyncStorage.getItem("usuario").then((data)=>{
+      console.log(data);
+
+    });
 }
       
   
@@ -32,7 +27,7 @@ async loadData(){
   render() {
     return (
       <View style={styles.container}>
-        <Text>Principal</Text>
+        
       </View>
     );
   }
