@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage, FlatList } from 'react-native';
+import { Platform, StyleSheet, Text, View, AsyncStorage, FlatList, TouchableOpacity } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 type Props = {};
@@ -56,14 +56,16 @@ getAgenda(){
         </View>
         
         <View>
-          <FlatList
-            data={this.state.agenda}
-            keyExtractor={this._keyExtractor}
+          <FlatList data={this.state.agenda} keyExtractor={this._keyExtractor} 
             renderItem={
               ({item}) => 
-              <View>
-                <Text>Onde: {item.estabelecimento} </Text>
-                <Text>Local: {item.unidade} </Text> 
+              <View style={styles.exibe}>
+                <TouchableOpacity>
+                  {/* <Text > {item.idagendamentoProfissional} </Text> */}
+                  <Text style={styles.dia}> {item.dia} </Text>
+                  <Text style={styles.nome}> {item.nome} - {item.funcao} </Text>
+                  <Text style={styles.hora}> {item.hora} </Text> 
+                </TouchableOpacity>
               </View>
             }
           />
@@ -76,14 +78,48 @@ getAgenda(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff99',
+    // backgroundColor: '#ffff99',
   },
+
   textoAgenda: {
+    textAlign: 'center',
+    padding: '5%',
     marginTop: 40,
-    marginLeft: '40%',
+    width: '100%',
     marginBottom: 20,
     fontSize: 18,
+    backgroundColor: '#ffff99',
   },
+
+  exibe: {
+    marginLeft: '15%',
+    width: '70%',
+  },
+
+  dia: {
+    backgroundColor: '#ffffff',
+    padding: '1%',
+  },
+
+  nome: {
+    backgroundColor: '#ffffff',
+    padding: '1%',
+  },
+
+  hora: {
+    backgroundColor: '#ffffff',
+    marginBottom: 10,
+    padding: '1%',
+  },
+
+//   dia: "26/10/2017"
+//   estabelecimento: "Hugo Beauty"
+//   funcao: "Cabeleireiro"
+//   hora: "13:00 - 14:00"
+//   idagendamentoProfissional: "25"
+//   idcliente: "5"
+//   nome: "Alfredo"
+//   unidade: "Hugo Lageado"
 
   
 });
