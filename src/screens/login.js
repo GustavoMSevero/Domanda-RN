@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
+import { Platform, ScrollView,ActivityIndicator,StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
+let endpoint = require('../util/endpoint-config');
 var logo = require('../imgs/logo_domanda_v2.png');
 
 type Props = {};
@@ -10,7 +11,12 @@ export default class LoginComponent extends Component<Props> {
   constructor(props) {
     super(props);
 
-    this.state = { msg: null , email: null, senha: null};
+      this.state = {
+          msg: null,
+          email: null,
+          senha: null,
+          loading:false
+      };
 
   }
 
@@ -32,7 +38,8 @@ export default class LoginComponent extends Component<Props> {
 
   logar(){
     //console.log(this.state.email+' '+this.state.senha)
-    var urlLoginUsuario = 'http://localhost:8888/sistemas/Webapps/domanda_api/api/admin_estabelecimento/pegaUsuario.php';
+      this.setState({loading:true});
+    var urlLoginUsuario = endpoint.backendUrl + '/api/admin_estabelecimento/pegaUsuario.php';
     fetch(urlLoginUsuario,{ method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -46,12 +53,14 @@ export default class LoginComponent extends Component<Props> {
 
       .then((response) => response.json())
       .then((responseJson) => {
+          this.setState({loading:false});
+        // alert(JSON.stringify(responseJson));
           if(responseJson.status === "null"){
             this.setState({msg: responseJson.msg});
             return;
           }else{
             AsyncStorage.setItem("usuario", JSON.stringify(responseJson));
-            Actions.push('principal');
+            Actions.agenda();
           }
           
         })
@@ -65,7 +74,7 @@ export default class LoginComponent extends Component<Props> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View >
           <Image source={logo} style={styles.logo} />
         </View>
@@ -81,15 +90,16 @@ export default class LoginComponent extends Component<Props> {
           />
         </View>
         <View backgroundColor="#ffe066" style={styles.btnLogar}>
-          <Button onPress={() => this.logar()} title="ACESSE" color="#000000"/>
+          <Button disabled={this.state.loading} onPress={() => this.logar()} title="ACESSE" color="#000000"/>
         </View>
         <View backgroundColor="#ffe066" style={styles.btnCadatro}>
-          <Button onPress={() => Actions.cadastro()} title="CADASTRE-SE" color="#000000"/>
+          <Button disabled={this.state.loading} onPress={() => Actions.cadastro()} title="CADASTRE-SE" color="#000000"/>
         </View>
         <View>
           <Text style={styles.avisoErro}>{this.state.msg}</Text>
         </View>
-      </View>
+          {this.state.loading && <ActivityIndicator size="large"/> }
+      </ScrollView>
     );
   }
 }

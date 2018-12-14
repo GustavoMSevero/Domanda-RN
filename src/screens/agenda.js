@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage, FlatList, TouchableOpacity } from 'react-native';
+import {
+    Platform,
+    StyleSheet,
+    Text,
+    View,
+    AsyncStorage,
+    FlatList,
+    TouchableOpacity,
+    ActivityIndicator
+} from 'react-native';
 import {Actions} from 'react-native-router-flux';
+let endpoint = require('../util/endpoint-config');
 
 type Props = {};
 export default class AgendaComponent extends Component<Props> {
 
   constructor(props) {
     super(props);
-    this.state = { agenda:[], idusuario:'', nome:'', sobrenome:'', usuario:[]};
+    this.state = { agenda:[], idusuario:'', nome:'', sobrenome:'', usuario:[],
+      loading:false};
 
   }
 
@@ -28,8 +39,9 @@ getAgenda(){
 
   var idcliente = this.state.idusuario;
   //console.log('idusuario '+idcliente)
+    this.setState({loading:true});
   var opcao = 3;
-  let urlGetAgenda = 'http://localhost:8888/sistemas/Webapps/domanda_api/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idcliente='+idcliente;
+  let urlGetAgenda = endpoint.backendUrl + '/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idcliente='+idcliente;
   fetch(urlGetAgenda,{ method: 'GET',
       headers: {
         Accept: 'application/json','Content-Type': 'application/json',
@@ -38,7 +50,7 @@ getAgenda(){
       .then((response) => response.json())
       .then((responseJson) => {
           console.log(responseJson)
-          this.setState({agenda: responseJson});
+          this.setState({agenda: responseJson,loading:false});
         })
         .catch((error) => {
         console.error(error);
@@ -49,14 +61,34 @@ getAgenda(){
   
   
   render() {
-    return (
-      <View style={styles.container}>
-        <View>
+      /*<View>
           <Text style={styles.textoAgenda}>AGENDA</Text>
-        </View>
-        
+      </View>
+
+      */
+      return (
+      <View style={styles.container}>
+
         <View>
-          <FlatList data={this.state.agenda} keyExtractor={this._keyExtractor} 
+          <FlatList data={this.state.agenda} keyExtractor={this._keyExtractor}
+
+            ListEmptyComponent={()=>{return <View style={{marginTop:50}}>
+                {!this.state.loading && <View >
+                    <TouchableOpacity onPress={()=>{this.getAgenda();}}>
+                        <Text style={{fontWeight:'bold',textAlign:'center',color:'black'}}> Sem resultados</Text>
+                        <View style={{justifyContent: 'center',alignItems: 'center', flexDirection: 'row',paddingTop:7}}>
+                            <Text style={{fontSize:12}}>Toque para atualizar</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                </View>
+
+                }
+                {this.state.loading && <ActivityIndicator size="large"/> }
+
+            </View>}}
+
+
             renderItem={
               ({item}) => 
               <View style={styles.exibe}>
