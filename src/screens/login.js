@@ -26,7 +26,7 @@ export default class LoginComponent extends Component<Props> {
   
   async loadData(){
     AsyncStorage.getItem("usuario").then((data)=>{
-        //console.log(data);
+        console.log(data);
         if(data == null){
           console.log("Não tem dados")
         } else{
@@ -96,7 +96,7 @@ export default class LoginComponent extends Component<Props> {
           <Button disabled={this.state.loading} onPress={() => Actions.cadastro()} title="CADASTRE-SE" color="#fbd022"/>
         </View>
         <View backgroundColor="#ffe066" style={styles.btnExperimentar}>
-          <Button title="EXPERIMENTE" color="#fbd022"/>
+          <Button onPress={() => false} title="EXPERIMENTE" color="#fbd022"/>
         </View>
         <View>
           <Text style={styles.avisoErro}>{this.state.msg}</Text>

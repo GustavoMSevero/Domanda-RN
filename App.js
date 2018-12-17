@@ -23,7 +23,7 @@ render() {
                 <Scene type="reset" key="login" initial component={LoginComponent} hideNavBar />
                 <Scene tabs
                        hideNavBar
-                       type="reset"
+                       //type="reset"
                        key="tabsHome"
                        showIcon={true}
                        activeTintColor='blue'
@@ -37,10 +37,6 @@ render() {
                     <Scene key="procurar" icon={TabIcon} iconName='search' component={ProcurarComponent} hideNavBar />
                     <Scene key="atualizar" icon={TabIcon} iconName='cog' component={AtualizarComponent} hideNavBar />
                 </Scene>
-                {/* <Scene key="cadastro" component={CadastroComponent} hideNavBar />
-
-                <Scene key="atualizar" component={AtualizarComponent} hideNavBar />
-                <Scene key="abertura" component={SplashComponent} hideNavBar /> */}
             </Scene>
         </Router>
 
