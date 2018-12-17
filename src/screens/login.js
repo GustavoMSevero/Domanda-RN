@@ -26,11 +26,12 @@ export default class LoginComponent extends Component<Props> {
   
   async loadData(){
     AsyncStorage.getItem("usuario").then((data)=>{
-        console.log(data);
+        //console.log(data);
         if(data == null){
           console.log("Não tem dados")
         } else{
-          Actions.push('agenda');
+          //Actions.push('agenda');
+          Actions.agenda();
         }
   
       });
@@ -110,8 +111,6 @@ export default class LoginComponent extends Component<Props> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //justifyContent: 'center',
-    //alignItems: 'center',
     backgroundColor: '#fffef1',
   },
   logo: {

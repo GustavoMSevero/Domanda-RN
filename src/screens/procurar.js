@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { Platform, StyleSheet, Text, View, AsyncStorage, TextInput } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 type Props = {};
@@ -7,7 +7,7 @@ export default class ProcurarComponent extends Component<Props> {
 
   constructor(props) {
     super(props);
-    this.state = { msg: null , email: null, senha: null};
+    this.state = { msg: null , email: null, senha: null, cidade: null};
 
   }
 
@@ -27,6 +27,12 @@ async loadData(){
   render() {
     return (
       <View style={styles.container}>
+        <View>
+        <TextInput style={styles.campoCidade}
+            placeholder="Cidade"
+            onChangeText={texto => this.state.cidade = texto }
+          />
+        </View>
         
       </View>
     );
@@ -36,7 +42,14 @@ async loadData(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff99',
+    backgroundColor: '#fffef1',
   },
-  
+  campoCidade: {
+    backgroundColor:"#ffffff",
+    width: '85%',
+    height: 35,
+    marginTop: 20,
+    marginLeft: 20,
+  }
+
 });

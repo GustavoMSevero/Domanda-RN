@@ -12,6 +12,10 @@ import {
 import {Actions} from 'react-native-router-flux';
 let endpoint = require('../util/endpoint-config');
 
+import {YellowBox} from 'react-native';
+YellowBox.ignoreWarnings(['Warning: ...']);
+console.disableYellowBox = true;
+
 type Props = {};
 export default class AgendaComponent extends Component<Props> {
 
@@ -110,7 +114,7 @@ getAgenda(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#ffff99',
+    //backgroundColor: '#fffef1',
   },
 
   textoAgenda: {

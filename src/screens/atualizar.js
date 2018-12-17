@@ -36,7 +36,7 @@ async loadData(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffff99',
+    backgroundColor: '#fffef1',
   },
   
 });
