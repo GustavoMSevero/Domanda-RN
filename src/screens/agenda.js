@@ -29,7 +29,7 @@ componentDidMount(){
 async loadData(){
   AsyncStorage.getItem("usuario").then((data)=>{
       this.setState({usuario: JSON.parse(data)});
-      //console.log(this.state.usuario)
+      console.log(this.state.usuario)
       this.setState({idusuario: this.state.usuario.idusuario});
       this.getAgenda();
     });
@@ -61,11 +61,11 @@ getAgenda(){
   
   
   render() {
-      /*<View>
+      <View>
           <Text style={styles.textoAgenda}>AGENDA</Text>
       </View>
 
-      */
+      
       return (
       <View style={styles.container}>
 

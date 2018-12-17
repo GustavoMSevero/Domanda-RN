@@ -26,20 +26,21 @@ render() {
                        type="reset"
                        key="tabsHome"
                        showIcon={true}
-                    // activeTintColor='red'
+                       activeTintColor='blue'
                     // inactiveTintColor='black'
                        panHandlers={null}
                        tabBarPosition={'bottom'}
                        labelStyle={{color:'black'}}
 
                 >
-                    <Scene key="agenda" icon={TabIcon} iconName='calendar' component={AgendaComponent} navigationBarStyle={{backgroundColor: '#ffff99'}} title={'Agenda'} />
+                    <Scene key="agenda" icon={TabIcon} iconName='calendarO' component={AgendaComponent} navigationBarStyle={{backgroundColor: '#ffff99'}} title={'Agenda'} />
                     <Scene key="procurar" icon={TabIcon} iconName='search' component={ProcurarComponent} hideNavBar />
+                    <Scene key="atualizar" icon={TabIcon} iconName='cog' component={AtualizarComponent} hideNavBar />
                 </Scene>
-                <Scene key="cadastro" component={CadastroComponent} hideNavBar />
+                {/* <Scene key="cadastro" component={CadastroComponent} hideNavBar />
 
                 <Scene key="atualizar" component={AtualizarComponent} hideNavBar />
-                <Scene key="abertura" component={SplashComponent} hideNavBar />
+                <Scene key="abertura" component={SplashComponent} hideNavBar /> */}
             </Scene>
         </Router>
 

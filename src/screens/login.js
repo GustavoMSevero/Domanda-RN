@@ -90,10 +90,13 @@ export default class LoginComponent extends Component<Props> {
           />
         </View>
         <View backgroundColor="#ffe066" style={styles.btnLogar}>
-          <Button disabled={this.state.loading} onPress={() => this.logar()} title="ACESSE" color="#000000"/>
+          <Button disabled={this.state.loading} onPress={() => this.logar()} title="ACESSE" color="#f7921a"/>
         </View>
         <View backgroundColor="#ffe066" style={styles.btnCadatro}>
-          <Button disabled={this.state.loading} onPress={() => Actions.cadastro()} title="CADASTRE-SE" color="#000000"/>
+          <Button disabled={this.state.loading} onPress={() => Actions.cadastro()} title="CADASTRE-SE" color="#fbd022"/>
+        </View>
+        <View backgroundColor="#ffe066" style={styles.btnExperimentar}>
+          <Button title="EXPERIMENTE" color="#fbd022"/>
         </View>
         <View>
           <Text style={styles.avisoErro}>{this.state.msg}</Text>
@@ -109,7 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //justifyContent: 'center',
     //alignItems: 'center',
-    backgroundColor: '#ffff99',
+    backgroundColor: '#fffef1',
   },
   logo: {
     height: 75,
@@ -141,6 +144,12 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   btnCadatro:{
+    width: '87%',
+    marginLeft: '6%',
+    borderRadius: 5,
+    marginBottom: 20,
+  },
+  btnExperimentar:{
     width: '87%',
     marginLeft: '6%',
     borderRadius: 5,

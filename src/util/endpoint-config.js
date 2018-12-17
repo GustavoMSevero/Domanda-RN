@@ -2,7 +2,8 @@
 
 //localhost
 if(__DEV__){
-    exports.backendUrl = 'http://192.168.0.22:8000';
+    exports.backendUrl = 'http://localhost:8888/sistemas/Webapps/domanda_api/';
+    //http://192.168.0.22:8000
 }
 //producao
 else{
