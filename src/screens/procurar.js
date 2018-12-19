@@ -7,7 +7,7 @@ type Props = {};
 export default class ProcurarComponent extends Component<Props> {
 
   // getData(){
-  //   Geocoder.init('AIzaSyCaXIRP1G2Sxp4xt7xCjf2xwEIv7pvaVgY'); // use a valid API key
+  //   Geocoder.init('XXXXXXXXXXXXXXX'); // use a valid API key
 
   //   Geocoder.getFromLatLng(-30.0350938, -51.1480199).then(
   //     json => {
