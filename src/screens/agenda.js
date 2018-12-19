@@ -53,7 +53,7 @@ getAgenda(){
       })
       .then((response) => response.json())
       .then((responseJson) => {
-          console.log(responseJson)
+          //console.log(responseJson)
           this.setState({agenda: responseJson,loading:false});
         })
         .catch((error) => {
