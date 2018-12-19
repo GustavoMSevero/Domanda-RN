@@ -43,7 +43,8 @@ async loadData(){
 }
 
 procurar(){
-  console.log("Buscar!");
+  console.log(this.state.cidade);
+  alert(this.state.cidade)
 }
       
   

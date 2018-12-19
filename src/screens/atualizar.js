@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, AsyncStorage } from 'react-native';
+import { Platform, StyleSheet, Text, View, AsyncStorage, TextInput, Button } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 type Props = {};
@@ -21,13 +21,30 @@ async loadData(){
 
     });
 }
+
+atualizar(){
+
+}
       
   
   
   render() {
     return (
       <View style={styles.container}>
-        
+        <View>
+          <TextInput style={styles.campoNome}
+            placeholder="Nome"/>
+          
+          <TextInput style={styles.campoSobrenome}
+            placeholder="Sobrenome"/>
+
+          <TextInput style={styles.campoSenha}
+            secureTextEntry={true}
+            />
+        </View>
+        <View backgroundColor="#f7921a" style={styles.btnAtualizar}>
+          <Button onPress={() => this.atualizar()} title="Atualizar" color="#ffffff"/>
+        </View>
       </View>
     );
   }
@@ -38,5 +55,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fffef1',
   },
+  campoNome: {
+    width: '85%',
+    height: 35,
+    marginTop: 20,
+    backgroundColor:"#ffffff",
+    borderRadius: 5,
+    marginLeft: 20,
+  },
+  campoSobrenome: {
+    width: '85%',
+    height: 35,
+    marginTop: 20,
+    backgroundColor:"#ffffff",
+    borderRadius: 5,
+    marginLeft: 20,
+  },
+  campoSenha: {
+    width: '85%',
+    height: 35,
+    marginTop: 20,
+    backgroundColor:"#ffffff",
+    borderRadius: 5,
+    marginLeft: 20,
+  },
+  btnAtualizar: {
+    width: '85%',
+    height: 35,
+    marginTop: 20,
+    borderRadius: 5,
+    marginLeft: 20,
+  }
   
 });
