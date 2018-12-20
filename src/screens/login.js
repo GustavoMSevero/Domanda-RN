@@ -39,7 +39,7 @@ export default class LoginComponent extends Component<Props> {
 
   logar(){
     //console.log(this.state.email+' '+this.state.senha)
-      this.setState({loading:true});
+    this.setState({loading:true});
     var urlLoginUsuario = endpoint.backendUrl + '/api/admin_estabelecimento/pegaUsuario.php';
     fetch(urlLoginUsuario,{ method: 'POST',
       headers: {

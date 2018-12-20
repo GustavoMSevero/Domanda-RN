@@ -31,7 +31,7 @@ render() {
                        labelStyle={{color:'black'}}
 
                 >
-                    <Scene key="agenda" icon={TabIcon} iconName='calendarO' component={AgendaComponent} title={'Agendar'} />
+                    <Scene key="agenda" icon={TabIcon} iconName='calendarO' component={AgendaComponent} title={'Agenda'} />
                     <Scene key="procurar" icon={TabIcon} iconName='search' component={ProcurarComponent} title={'Procurar'} />
                     <Scene key="atualizar" icon={TabIcon} iconName='cog' component={AtualizarComponent} title={'Atualizar'} />
                 </Scene>
