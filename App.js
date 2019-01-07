@@ -7,6 +7,7 @@ import CadastroComponent from './src/screens/cadastro';
 import AgendaComponent from './src/screens/agenda';
 import ProcurarComponent from './src/screens/procurar';
 import AtualizarComponent from './src/screens/atualizar';
+import ConsultaComponent from './src/screens/consulta';
 import SplashComponent from './src/screens/splash';
 import TabIcon from './src/components/tabicon';
 
@@ -35,6 +36,7 @@ render() {
                     <Scene key="procurar" icon={TabIcon} iconName='search' component={ProcurarComponent} title={'Procurar'} />
                     <Scene key="atualizar" icon={TabIcon} iconName='cog' component={AtualizarComponent} title={'Atualizar'} />
                 </Scene>
+                <Scene key="consulta" component={ConsultaComponent} title={'Agendamento'} />
             </Scene>
         </Router>
 

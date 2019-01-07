@@ -10,6 +10,7 @@ import {
     ActivityIndicator
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+
 let endpoint = require('../util/endpoint-config');
 
 import {YellowBox} from 'react-native';
@@ -96,8 +97,7 @@ getAgenda(){
             renderItem={
               ({item}) => 
               <View style={styles.exibe}>
-                <TouchableOpacity>
-                  {/* <Text > {item.idagendamentoProfissional} </Text> */}
+                <TouchableOpacity onPress={()=>{ Actions.consulta({idagendamentoProfissional:item.idagendamentoProfissional}) }}>
                   <Text style={styles.dia}> {item.dia} </Text>
                   <Text style={styles.nome}> {item.nome} - {item.funcao} </Text>
                   <Text style={styles.hora}> {item.hora} </Text> 
