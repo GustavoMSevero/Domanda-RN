@@ -9,7 +9,7 @@ export default class ConsultaComponent extends Component<Props> {
 
   constructor(props) {
     super(props);
-    this.state = {idagendamentoProfissional: 0, dadosAgendamento: ''};
+    this.state = {idagendamentoProfissional: '', dadosAgendamento: ''};
   }
 
 componentDidMount(){
@@ -45,6 +45,23 @@ getAgendamento(){
         });
 
 }
+
+desmarcar(){
+  var idagendamento = this.props.idagendamentoProfissional;
+  var opcao = 4;
+  let urlCancelAgenda = endpoint.backendUrl + '/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idagendamento='+idagendamento;
+
+  fetch(urlCancelAgenda, {
+        method: 'delete'
+      }).then(response =>
+        response.json().then(json => {
+          return json;
+        })
+      );
+
+      Actions.agenda();
+    
+}
       
   
   
@@ -68,11 +85,11 @@ getAgendamento(){
               ({item}) => 
               <View >
                 {/* <Text > {item.idagendamento} </Text> */}
-                <Text > {item.estabelecimento} </Text>
-                <Text > {item.unidade} </Text>
-                <Text > {item.dia} </Text> 
-                <Text > {item.hora} </Text>
-                <Button onPress={()=> false} title="Cancelar Agendamento"></Button>
+                <Text style={styles.local}> Onde... {item.estabelecimento} </Text>
+                <Text style={styles.unidade}> Unid... {item.unidade} </Text>
+                <Text style={styles.data}> Data... {item.dia} </Text> 
+                <Text style={styles.hora}> Hora... {item.hora} </Text>
+                <Button onPress={()=> this.desmarcar(item.idagendamento)} title="Desmarcar"></Button>
               </View>
             }
           />
@@ -86,6 +103,38 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fffef1',
+    marginLeft: '2%',
+  },
+
+  local: {
+    backgroundColor: '#ffffff',
+    marginLeft: '10%',
+    marginTop: 20,
+    width: '70%',
+    paddingTop: 5,
+    paddingLeft: 5,
+  },
+  unidade: {
+    backgroundColor: '#ffffff',
+    marginLeft: '10%',
+    width: '70%',
+    paddingTop: 2,
+    paddingLeft: 5,
+  },
+  data: {
+    backgroundColor: '#ffffff',
+    marginLeft: '10%',
+    width: '70%',
+    paddingTop: 2,
+    paddingLeft: 5,
+  },
+  hora: {
+    backgroundColor: '#ffffff',
+    marginLeft: '10%',
+    width: '70%',
+    paddingTop: 2,
+    paddingLeft: 5,
+    paddingBottom: 5,
   },
   
 });

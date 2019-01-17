@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, ScrollView,ActivityIndicator,StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
+import { Platform, ScrollView, ActivityIndicator, StyleSheet, Text, View, Image, TextInput, Button, AsyncStorage } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 
 let endpoint = require('../util/endpoint-config');

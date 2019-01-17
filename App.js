@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
 import {Router,Scene,Stack} from 'react-native-router-flux';
 
+import SplashComponent from './src/screens/splash';
 import LoginComponent from './src/screens/login';
 import CadastroComponent from './src/screens/cadastro';
 import AgendaComponent from './src/screens/agenda';
 import ProcurarComponent from './src/screens/procurar';
+import ProfissionalComponent from './src/screens/profissional';
+import UnidadeComponent from './src/screens/unidade';
 import AtualizarComponent from './src/screens/atualizar';
 import ConsultaComponent from './src/screens/consulta';
-import SplashComponent from './src/screens/splash';
 import TabIcon from './src/components/tabicon';
 
 type Props = {};
@@ -37,6 +39,9 @@ render() {
                     <Scene key="atualizar" icon={TabIcon} iconName='cog' component={AtualizarComponent} title={'Atualizar'} />
                 </Scene>
                 <Scene key="consulta" component={ConsultaComponent} title={'Agendamento'} />
+                <Scene key="unidade" component={UnidadeComponent} title={'Unidade'} />
+                <Scene key="profissional" component={ProfissionalComponent} title={'Profissional'} />
+                <Scene key="cadastro" component={CadastroComponent} title={'Cadastro'} />
             </Scene>
         </Router>
 

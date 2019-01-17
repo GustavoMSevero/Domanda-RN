@@ -44,7 +44,7 @@ getAgenda(){
 
   var idcliente = this.state.idusuario;
   //console.log('idusuario '+idcliente)
-    this.setState({loading:true});
+  this.setState({loading:true});
   var opcao = 3;
   let urlGetAgenda = endpoint.backendUrl + '/api/admin_estabelecimento/reqScheduleProJson.php?opcao='+opcao+'&idcliente='+idcliente;
   fetch(urlGetAgenda,{ method: 'GET',

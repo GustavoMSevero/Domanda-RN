@@ -38,7 +38,7 @@ export default class ProcurarComponent extends Component<Props> {
     super(props);
     this.state = { 
       msg: null , email: null, senha: null, cidade: null, tipo: null, opcao: null,
-      estabelecimento: null
+      estabelecimento: null, idestabelecimento: null
     }
 
   }
@@ -58,7 +58,6 @@ async loadData(){
 }
 
 procurar(){
-
   var opcao = 1;
   var urlLoginUsuario = endpoint.backendUrl + '/api/admin_estabelecimento/reqCiaJson.php?opcao='+opcao+'&tipo='+this.state.tipo;
     fetch(urlLoginUsuario,{ method: 'GET'})
@@ -103,9 +102,6 @@ procurar(){
                 <View >
                     <TouchableOpacity onPress={()=>{this.procurar();}}>
                         <Text style={{fontWeight:'bold',textAlign:'center',color:'black'}}> Sem resultados</Text>
-                        {/* <View style={{justifyContent: 'center',alignItems: 'center', flexDirection: 'row',paddingTop:7}}>
-                            <Text style={{fontSize:12}}>Toque para atualizar</Text>
-                        </View> */}
                     </TouchableOpacity>
                 </View>
 
@@ -118,8 +114,8 @@ procurar(){
             renderItem={
               ({item}) => 
               <View style={styles.exibe}>
-                <TouchableOpacity>
-                  {/* <Text > {item.idagendamentoProfissional} </Text> */}
+                <TouchableOpacity onPress={()=>{ Actions.unidade({idestabelecimento:item.idestabelecimento}) }}>
+                  {/* <Text > {item.idestabelecimento} </Text> */}
                   <Text style={styles.nome}> {item.nome} </Text>
                   <Text style={styles.cid}> {item.cid} </Text>
                 </TouchableOpacity>
@@ -165,11 +161,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     padding: '1%',
     marginTop: 10,
+    paddingTop: 5,
+    paddingLeft: 5,
   },
   cid: {
     backgroundColor: '#ffffff',
     padding: '1%',
     marginBottom: 10,
+    paddingTop: 5,
+    paddingLeft: 5,
   },
 
 });
